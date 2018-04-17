@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>conversion de ST</title>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" type="text/css" media="screen">
+        <link rel="stylesheet" type="text/css" href="html_manip.css" media="screen" />
+    </head>
+
+    <body>
+        <h1>Manip de ficher html</h1>
+        <nav>
+            <button onClick="chargeHTMLHdlr();" >ouvrir un fichier html</button>
+            <button onClick="addId();" >rajout id au tag</button><span id="txtNomFichier">nom ficher</span>
+            <!--<button onClick="convSrtHtml();" >.srt &rarr; Transcription html</button>
+            <button onClick="convSrtTxt();" >.srt &rarr; Transcription txt</button>-->
+        </nav>
+        <div id="ctnTxts">
+            <div><textarea id="txtEntree"></textarea></div>
+            <div id="ctnSortie"><textarea id="txtSortie"></textarea></div>
+        </div>
+
+        <div id="ctnPopupOuvreHTML">
+            <input style="width:100%" type="file" id="txtFichierHTML"/>
+        </div>
+        <div id="ctnPopupSauveFichier"></div>
+
+
+        <script src="http://code.jquery.com/jquery-2.1.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+        <script src="html_manip.js"></script>
+        <script>
+		$(function () {
+		    $("#txtEntree").val(textDebut);
+		    console.log("Manip de ficher html")
+		    //popup ouverture 
+		    $("#ctnPopupOuvreHTML").dialog({
+			modal: true,
+			autoOpen: false,
+			width: 500,
+
+			buttons: {
+			    "OK": function () {
+				var fileInput = document.querySelector('#txtFichierHTML');
+				var nomFichier = fileInput.files[0].name;
+				$("#txtNomFichier").val(nomFichier);
+				var lecteur = new FileReader();
+				lecteur.onload = function () {
+				    $("#txtEntree").val(lecteur.result);
+				}
+				lecteur.readAsText(fileInput.files[0]);
+				document.getElementById("txtNomFichier").innerHTML = nomFichier;
+				$(this).dialog("close");
+			    },
+			    "Annuler": function () {
+				$(this).dialog("close");
+			    }
+			}
+		    });
+
+		    //popup sauvegarde 
+
+		    $("#ctnPopupSauveFichier").dialog({
+			modal: true,
+			autoOpen: false,
+			width: 500,
+		    });
+		    $('#ctnPopupSauveFichier').load('sauvegarde.html');
+		});
+
+
+		function chargeHTMLHdlr() {
+		    $("#ctnPopupOuvreHTML").dialog("open");
+		}
+
+
+        </script>
+
+    </body>
+</html>

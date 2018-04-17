@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>conversion de ST</title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" type="text/css" media="screen">
+ <link rel="stylesheet" type="text/css" href="txt_conv.css" media="screen" />
+</head>
+
+<body>
+<nav>
+<button onClick="chargeTxtHdlr();" >ouvrir un fichier texte</button>
+<button onClick="convTxtCsv();" >vers CSV</button>
+</nav>
+<div id="ctnTxts">
+	<div><textarea id="txtEntree"></textarea></div>
+	<div id="ctnSortie"><textarea id="txtSortie"></textarea></div>
+</div>
+
+<div id="ctnPopupOuvreST">
+	<input style="width:100%" type="file" id="txtFichierST"/>
+</div>
+<div id="ctnPopupSauveFichier"></div>
+
+
+<script src="http://code.jquery.com/jquery-2.1.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+		<script src="txt_conv.js"></script>
+<script>
+$(function(){
+	$("#txtEntree").val("debut");
+	
+	//popup ouverture 
+	$( "#ctnPopupOuvreST" ).dialog({
+		modal: true,
+		autoOpen: false,
+		width: 500,
+		
+		buttons: {
+			"OK": function() {
+				var fileInput = document.querySelector('#txtFichierST');
+				var nomFichier = fileInput.files[0].name;
+				$("#txtNomFichier").val(nomFichier);
+				var lecteur = new FileReader();
+				lecteur.onload = function(){
+					$("#txtEntree").val(lecteur.result);
+				}
+				lecteur.readAsText(fileInput.files[0]);
+				$( this ).dialog("close" );
+			},
+			"Annuler": function(){
+				$( this ).dialog( "close" );
+			}
+		}
+    });
+	
+	//popup sauvegarde 
+	
+	$( "#ctnPopupSauveFichier" ).dialog({
+		modal: true,
+		autoOpen: false,
+		width: 500,
+	});
+	$('#ctnPopupSauveFichier').load('sauvegarde.html');
+});
+
+
+function chargeTxtHdlr(){
+	$( "#ctnPopupOuvreST" ).dialog("open");
+}
+
+
+</script>
+
+</body>
+</html>

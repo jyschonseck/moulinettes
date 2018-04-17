@@ -1,0 +1,30 @@
+/* CSS Document */
+body{
+    font-family: verdana;
+}
+
+h1{
+    text-align: center;
+}
+
+textarea{
+	width:100%;
+        
+	height:40rem;
+}
+
+#ctnTxts{
+	display:flex;
+	flex-direction:row;	
+}
+
+#ctnTxts>div{
+	flex:1;
+}
+
+.ctnST{
+	border:solid 1px;
+	margin:0.2rem;
+}
+
+

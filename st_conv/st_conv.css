@@ -1,0 +1,21 @@
+/* CSS Document */
+textarea{
+	width:100%;
+	height:30rem;
+}
+
+#ctnTxts{
+	display:flex;
+	flex-direction:row;	
+}
+
+#ctnTxts>div{
+	flex:1;
+}
+
+.ctnST{
+	border:solid 1px;
+	margin:0.2rem;
+}
+
+

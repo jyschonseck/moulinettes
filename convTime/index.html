@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>conversion de temps ...</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body{
+                font-family: verdana;
+                font-size:larger;
+            }
+            #ctnEntree input {
+                width:3rem;
+                font-size:larger;
+            }
+            
+        </style>
+        
+    </head>
+    <body>
+        <div id="ctnEntree">
+            <input type="number" id="entreeH" value="0">
+            <input type="number" id="entreeM" value="0" min="0" max="59">
+            <input type="number" id="entreeS" value="0" min="0" max="59">
+<!--            <input type="number" id="entreeD" value="0">-->
+        </div>
+        <div id="ctnSortie">
+            <p> en secondes ça fait : <span id="sortieSs">000</span></p>
+        </div>
+        
+<script src="http://code.jquery.com/jquery-2.1.1.js"></script>
+        <script>
+            $(function(){
+               $("#ctnEntree input").on("change", function(){
+                   console.log ("yo");
+                   var secondes = $("#entreeH").val()*3600 + $("#entreeM").val()*60 + parseInt($("#entreeS").val());
+                   $("#sortieSs").html(secondes);
+               }); 
+            });
+            </script>
+    </body>
+</html>
